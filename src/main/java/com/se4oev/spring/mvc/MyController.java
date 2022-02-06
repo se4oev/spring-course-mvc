@@ -5,13 +5,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
-
 /**
  * Created by se4oev on 06.02.2022
  * Description:
  */
 @Controller
+@RequestMapping("/employee")
 public class MyController {
 
     @RequestMapping("/")
@@ -22,6 +21,17 @@ public class MyController {
     @RequestMapping("/askDetails")
     public String askEmpDetails() {
         return "ask-emp-details-view";
+    }
+
+    @RequestMapping("/showDetails")
+    public String showEmpDetails(@RequestParam(name = "employeeName") String empName,
+                                 Model model) {
+
+        empName = "Mr. " + empName + "!";
+
+        model.addAttribute("nameAttribute", empName);
+
+        return "show-emp-details-view";
     }
 
 //    @RequestMapping("/showDetails")
@@ -41,16 +51,5 @@ public class MyController {
 //
 //        return "show-emp-details-view";
 //    }
-
-    @RequestMapping("/showDetails")
-    public String showEmpDetails(@RequestParam(name = "employeeName") String empName,
-                                 Model model) {
-
-        empName = "Mr. " + empName + "!";
-
-        model.addAttribute("nameAttribute", empName);
-
-        return "show-emp-details-view";
-    }
 
 }
